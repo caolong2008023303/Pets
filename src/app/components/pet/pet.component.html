@@ -1,0 +1,8 @@
+<div *ngFor="let item of processedData | keyvalue:keepOriginalOrder">
+    <div class="heading">
+        {{item.key}}
+    </div>
+    <div class="catStyle" *ngFor="let cat of item.value">
+        {{cat}}
+    </div>
+</div>
