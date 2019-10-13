@@ -4,7 +4,7 @@ front-end test
 # Angular8
 
 ### Project Technical Structure
-***
+
 *  Angular8
 *  Angular/http
 *  Rxjs
@@ -12,7 +12,6 @@ front-end test
 
 ### Install
 
-***
 project address: (`git clone`)
 
 ```
@@ -23,7 +22,7 @@ install node_modules with `npm`
 ```
 npm install
 ```
-***
+
 ### Run
 
 start server (http://localhost:4200)
@@ -36,6 +35,12 @@ publish production
 
 ```
 npm run build
+```
+
+### Test
+
+```
+npm run test
 ```
 
 

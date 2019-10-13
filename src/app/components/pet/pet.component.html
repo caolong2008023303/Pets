@@ -1,8 +1,13 @@
-<div *ngFor="let item of processedData | keyvalue:keepOriginalOrder">
-    <div class="heading">
-        {{item.key}}
-    </div>
-    <div class="catStyle" *ngFor="let cat of item.value">
-        {{cat}}
+<div id="showContent" *ngIf="displayedFlag; else errorMessage">
+    <div *ngFor="let item of displayedData | keyvalue:keepOriginalOrder">
+        <div class="heading">
+            {{item.key}}
+        </div>
+        <div class="catStyle" *ngFor="let cat of item.value">
+            {{cat}}
+        </div>
     </div>
 </div>
+<ng-template id="showError" #errorMessage>
+    <h1>Sorry, current app is under the maintenance!</h1>
+</ng-template>

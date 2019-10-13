@@ -9,7 +9,8 @@ import { Owner } from '../../models/owner.model';
 })
 export class PetComponent implements OnInit {
 
-  processedData: any;
+  displayedData: any;
+  displayedFlag: boolean = true;
   catsOfMaleOwner: any = [];
   catsOfFemaleOwner: any = [];
 
@@ -19,34 +20,39 @@ export class PetComponent implements OnInit {
   constructor(private petService: PetService) { }
 
   ngOnInit() {
-    this.petService.getPets().subscribe(res => {
-      const owners = res as Owner[];
-      owners.forEach((owner) => {
-        if (owner.gender == 'Male') {
-          if (owner.pets != null) {
-            owner.pets.forEach((pet) => {
-              if (pet.type == 'Cat') {
-                this.catsOfMaleOwner.push(pet.name);
-              }
-            });
+    this.petService.getOwners().subscribe(res => {
+      try {
+        const owners = res as Owner[];
+        owners.forEach((owner) => {
+          if (owner.gender == 'Male') {
+            if (owner.pets != null) {
+              owner.pets.forEach((pet) => {
+                if (pet.type == 'Cat') {
+                  this.catsOfMaleOwner.push(pet.name);
+                }
+              });
+            }
           }
-        }
-        else {
-          if (owner.pets != null) {
-            owner.pets.forEach((pet) => {
-              if (pet.type == 'Cat') {
-                this.catsOfFemaleOwner.push(pet.name);
-              }
-            });
+          else {
+            if (owner.pets != null) {
+              owner.pets.forEach((pet) => {
+                if (pet.type == 'Cat') {
+                  this.catsOfFemaleOwner.push(pet.name);
+                }
+              });
+            }
           }
-        }
-      });
+        });
 
-      this.processedData = Object.assign(
-        {},
-        { 'Male': this.catsOfMaleOwner.sort() },
-        { 'Female': this.catsOfFemaleOwner.sort() }
-      );
+        this.displayedData = Object.assign(
+          {},
+          { 'Male': this.catsOfMaleOwner.sort() },
+          { 'Female': this.catsOfFemaleOwner.sort() }
+        );
+      } catch (error) {
+        this.displayedFlag = false;
+      }
+
     });
   }
 
